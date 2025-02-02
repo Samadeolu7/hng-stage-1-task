@@ -37,7 +37,7 @@ This is a public API that takes a number and returns interesting mathematical pr
 
 ### Endpoint URL
 
-`GET /{number}`
+`GET /api/classify-number?number={number}`
 
 ### Request/Response Format
 
@@ -58,7 +58,7 @@ This is a public API that takes a number and returns interesting mathematical pr
 
 ```json
 {
-    "number": "alphabet",
+    "number": "invalid",
     "error": true
 }
 ```
@@ -66,7 +66,7 @@ This is a public API that takes a number and returns interesting mathematical pr
 ## Example Usage
 
 ```sh
-curl -X GET "http://127.0.0.1:8000/371"
+curl -X GET "http://127.0.0.1:8000/api/classify-number?number=371"
 ```
 
 ## Backlink
