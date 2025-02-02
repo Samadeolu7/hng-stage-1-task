@@ -5,7 +5,11 @@ from api.numbers_api import FunFacts
 router = APIRouter()
 
 @router.get("/api/classify-number")
-async def get_number_fact(request: Request, number: int = Query(..., description="The number to classify")):
+async def get_number_fact(request: Request, number: str = Query(..., description="The number to classify")):
+    try:
+        number = int(number)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid input. Number must be an integer.")
 
     facts = request.app.state.facts  # Reuse the initialized FunFacts instance
 
