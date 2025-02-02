@@ -1,10 +1,22 @@
+import aiohttp
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from routes import numbers
+from contextlib import asynccontextmanager
+import asyncio
 
-app = FastAPI()
+from api.numbers_api import FunFacts
+from routes.numbers import router
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    session = aiohttp.ClientSession()
+    app.state.facts = FunFacts(session)
+    yield
+    await session.close()
+
+app = FastAPI(lifespan=lifespan)
 
 # Configure CORS
 app.add_middleware(
@@ -15,7 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(numbers.router)
+app.include_router(router)
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
