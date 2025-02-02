@@ -1,4 +1,5 @@
 import aiohttp
+import math
 
 class FunFacts:
     def __init__(self):
@@ -19,7 +20,7 @@ class FunFacts:
     def check_prime(self, number):
         if number < 2:
             return False
-        for i in range(2, number):
+        for i in range(2, int(math.sqrt(number)) + 1):
             if number % i == 0:
                 return False
         return True
@@ -27,13 +28,10 @@ class FunFacts:
     def check_armstrong(self, number):
         num_str = str(number)
         power = len(num_str)
-        sum = 0
-        for digit in num_str:
-            sum += int(digit) ** power
-        return sum == number
+        return sum(int(digit) ** power for digit in num_str) == number
     
     def digit_sum(self, number):
-        return sum([int(digit) for digit in str(number)])
+        return sum(int(digit) for digit in str(number))
     
     def check_perfect(self, number):
-        return sum([i for i in range(1, number) if number % i == 0]) == number
+        return sum(i for i in range(1, number) if number % i == 0) == number
