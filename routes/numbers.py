@@ -6,8 +6,6 @@ router = APIRouter()
 
 @router.get("/api/classify-number")
 async def get_number_fact(request: Request, number: int = Query(..., description="The number to classify")):
-    if number < 0:
-        raise HTTPException(status_code=400, detail="Number must be non-negative")
 
     facts = request.app.state.facts  # Reuse the initialized FunFacts instance
 

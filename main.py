@@ -33,12 +33,12 @@ app.include_router(router)
 async def http_exception_handler(request, exc):
     return JSONResponse(
         status_code=exc.status_code,
-        content={"number": request.path_params.get('number', 'invalid'), "error": True},
+        content={"number": request.query_params.get('number', 'invalid'), "error": True},
     )
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=400,
-        content={"number": request.path_params.get('number', 'invalid'), "error": True},
+        content={"number": request.query_params.get('number', 'invalid'), "error": True},
     )
