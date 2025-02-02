@@ -30,14 +30,14 @@ This is a public API that takes a number and returns interesting mathematical pr
 4. Run the application:
 
     ```sh
-    uvicorn main:app --reload
+    uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
     ```
 
 ## API Documentation
 
 ### Endpoint URL
 
-`GET /api/classify-number/{number}`
+`GET /{number}`
 
 ### Request/Response Format
 
@@ -66,7 +66,7 @@ This is a public API that takes a number and returns interesting mathematical pr
 ## Example Usage
 
 ```sh
-curl -X GET "http://127.0.0.1:8000/api/classify-number/371"
+curl -X GET "http://127.0.0.1:8000/371"
 ```
 
 ## Backlink
