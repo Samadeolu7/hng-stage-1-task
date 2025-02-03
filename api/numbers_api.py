@@ -24,18 +24,18 @@ class FunFacts:
             return True
         if number % 2 == 0 or number % 3 == 0:
             return False
-        for i in range(5, int(math.sqrt(number)) + 1, 6):
+        for i in range(5, int(math.sqrt(abs(number))) + 1, 6):
             if number % i == 0 or number % (i + 2) == 0:
                 return False
         return True
 
     def check_armstrong(self, number):
-        num_str = str(number)
+        num_str = str(abs(number))
         power = len(num_str)
-        return sum(int(digit) ** power for digit in num_str) == number
+        return sum(int(digit) ** power for digit in num_str) == abs(number)
 
     def digit_sum(self, number):
-        return sum(int(digit) for digit in str(number))
+        return sum(int(digit) for digit in str(abs(number)))
 
     def check_perfect(self, number):
-        return sum(i for i in range(1, number // 2 + 1) if number % i == 0) == number
+        return sum(i for i in range(1, abs(number) // 2 + 1) if abs(number) % i == 0) == abs(number)
